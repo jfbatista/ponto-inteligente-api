@@ -16,6 +16,7 @@ create table `funcionario` (
  `email` varchar(255) not null,
  `senha` varchar(255) not null,
  `perfil` varchar(255) not null,
+ `valor_hora` decimal(19,2) default null,
  `qtd_horas_almoco` float default null,
  `qtd_horas_trabalho_dia` float default null,
  `empresa_id` bigint(20) default null,

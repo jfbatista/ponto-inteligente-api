@@ -19,30 +19,31 @@ import javax.persistence.Table;
 @Table(name = "empresa")
 public class Empresa {
 
-	private Long empresa_id;
-	private String razao_social;
+	private Long empresaId;
+	private String razaoSocial;
 	private String cnpj;
 	private Date dataCriacao;
 	private Date dataAtualizacao;
 	private List<Funcionario> funcionarios;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getEmpresa_id() {
-		return empresa_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "empresa_id")
+	public Long getEmpresaId() {
+		return empresaId;
 	}
 
-	public void setEmpresa_id(Long id) {
-		this.empresa_id = id;
+	public void setEmpresaId(Long empresaId) {
+		this.empresaId = empresaId;
 	}
 
 	@Column(name = "razao_social", nullable = false)
-	public String getRazao_social() {
-		return razao_social;
+	public String getRazaoSocial() {
+		return razaoSocial;
 	}
 
-	public void setRazao_social(String razao_social) {
-		this.razao_social = razao_social;
+	public void setRazaoSocial(String razao_social) {
+		this.razaoSocial = razao_social;
 	}
 
 	@Column(name = "cnpj", nullable = false)
@@ -95,57 +96,9 @@ public class Empresa {
 
 	@Override
 	public String toString() {
-		return "Empresa [id=" + empresa_id + ", razao_social=" + razao_social + ", cnpj=" + cnpj + ", dataCriacao="
+		return "Empresa [empresaId=" + empresaId + ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj + ", dataCriacao="
 				+ dataCriacao + ", dataAtualizacao=" + dataAtualizacao + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dataAtualizacao == null) ? 0 : dataAtualizacao.hashCode());
-		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
-		result = prime * result + ((funcionarios == null) ? 0 : funcionarios.hashCode());
-		result = prime * result + ((empresa_id == null) ? 0 : empresa_id.hashCode());
-		result = prime * result + ((razao_social == null) ? 0 : razao_social.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Empresa other = (Empresa) obj;
-		if (dataAtualizacao == null) {
-			if (other.dataAtualizacao != null)
-				return false;
-		} else if (!dataAtualizacao.equals(other.dataAtualizacao))
-			return false;
-		if (dataCriacao == null) {
-			if (other.dataCriacao != null)
-				return false;
-		} else if (!dataCriacao.equals(other.dataCriacao))
-			return false;
-		if (funcionarios == null) {
-			if (other.funcionarios != null)
-				return false;
-		} else if (!funcionarios.equals(other.funcionarios))
-			return false;
-		if (empresa_id == null) {
-			if (other.empresa_id != null)
-				return false;
-		} else if (!empresa_id.equals(other.empresa_id))
-			return false;
-		if (razao_social == null) {
-			if (other.razao_social != null)
-				return false;
-		} else if (!razao_social.equals(other.razao_social))
-			return false;
-		return true;
-	}
-
+	
 }

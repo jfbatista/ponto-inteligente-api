@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
@@ -27,7 +28,7 @@ import br.com.jdiweb.pontointeligente.api.enums.PerfilEnum;
 @Table(name = "funcionario")
 public class Funcionario {
 
-	private Long funcionario_id;
+	private Long funcionarioId;
 	private String nome;
 	private String email;
 	private String senha;
@@ -42,13 +43,14 @@ public class Funcionario {
 	private List<Lancamento> lancamentos;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getFuncionario_id() {
-		return funcionario_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "funcionario_id")
+	public Long getFuncionarioId() {
+		return funcionarioId;
 	}
 
-	public void setFuncionario_id(Long id) {
-		this.funcionario_id = id;
+	public void setFuncionarioId(Long funcionarioId) {
+		this.funcionarioId = funcionarioId;
 	}
 
 	@Column(name = "nome", nullable = false)
@@ -101,7 +103,7 @@ public class Funcionario {
 		this.valorHora = valorHora;
 	}
 
-	@Column(name = "qtde_horas_trabalho_dia")
+	@Column(name = "qtd_horas_trabalho_dia")
 	public Float getQtdHorasTrabalhoDia() {
 		return qtdHorasTrabalhoDia;
 	}
@@ -111,11 +113,11 @@ public class Funcionario {
 		return Optional.ofNullable(qtdHorasTrabalhoDia);
 	}
 
-	public void setQtdHorasTrabalhoDia(Float qtdeHorasTrabalhoDia) {
-		this.qtdHorasTrabalhoDia = qtdeHorasTrabalhoDia;
+	public void setQtdHorasTrabalhoDia(Float qtdHorasTrabalhoDia) {
+		this.qtdHorasTrabalhoDia = qtdHorasTrabalhoDia;
 	}
 
-	@Column(name = "qtde_horas_almoco")
+	@Column(name = "qtd_horas_almoco")
 	public Float getQtdHorasAlmoco() {
 		return qtdHorasAlmoco;
 	}
@@ -152,6 +154,7 @@ public class Funcionario {
 		this.dataAtualizacao = dataAtualizacao;
 	}
 
+	@JoinColumn(name = "empresa_id")
 	@ManyToOne(fetch = FetchType.EAGER)
 	public Empresa getEmpresa() {
 		return empresa;
@@ -184,10 +187,13 @@ public class Funcionario {
 
 	@Override
 	public String toString() {
-		return "Funcionario [id=" + funcionario_id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cpf=" + cpf
-				+ ", valorHora=" + valorHora + ", qtdeHorasTrabalhoDia=" + qtdHorasTrabalhoDia + ", qtdHorasAlmoco="
-				+ qtdHorasAlmoco + ", perfil=" + perfil + ", dataCriacao=" + dataCriacao + ", dataAtualizacao="
-				+ dataAtualizacao + "]";
+		return "Funcionario [funcionarioId=" + funcionarioId + ", nome=" + nome + ", email=" + email + ", senha="
+				+ senha + ", cpf=" + cpf + ", valorHora=" + valorHora + ", qtdHorasTrabalhoDia=" + qtdHorasTrabalhoDia
+				+ ", qtdHorasAlmoco=" + qtdHorasAlmoco + ", perfil=" + perfil + ", dataCriacao=" + dataCriacao
+				+ ", dataAtualizacao=" + dataAtualizacao + "]";
 	}
+	
+	
+	
 
 }

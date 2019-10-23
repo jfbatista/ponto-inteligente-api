@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -23,7 +24,7 @@ import br.com.jdiweb.pontointeligente.api.enums.TipoEnum;
 @Table(name = "lancamento")
 public class Lancamento {
 
-	private Long lancamento_id;
+	private Long lancamentoId;
 	private Date data;
 	private String descricao;
 	private String localizacao;
@@ -36,13 +37,14 @@ public class Lancamento {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getLancamento_id() {
-		return lancamento_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "lancamento_id")
+	public Long getLancamentoId() {
+		return lancamentoId;
 	}
 
-	public void setLancamento_id(Long id) {
-		this.lancamento_id = id;
+	public void setLancamentoId(Long lancamentoId) {
+		this.lancamentoId = lancamentoId;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -101,6 +103,7 @@ public class Lancamento {
 		this.tipo = tipo;
 	}
 
+	@JoinColumn(name = "funcionario_id")
 	@ManyToOne(fetch = FetchType.EAGER)
 	public Funcionario getFuncionario() {
 		return funcionario;
@@ -124,8 +127,11 @@ public class Lancamento {
 
 	@Override
 	public String toString() {
-		return "Lancamento [id=" + lancamento_id + ", data=" + data + ", descricao=" + descricao + ", localizacao=" + localizacao
-				+ ", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtualizacao + ", tipo=" + tipo + "]";
+		return "Lancamento [lancamentoId=" + lancamentoId + ", data=" + data + ", descricao=" + descricao
+				+ ", localizacao=" + localizacao + ", dataCriacao=" + dataCriacao + ", dataAtualizacao="
+				+ dataAtualizacao + ", tipo=" + tipo + "]";
 	}
+
+
 
 }
